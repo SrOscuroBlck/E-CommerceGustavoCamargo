@@ -1,0 +1,7 @@
+Promises can have 3 states:
+
+Pending, rejected or fullfilled
+
+example: let task = new Promise((resolve, rejected)=>{
+    resolve('task completed')
+})

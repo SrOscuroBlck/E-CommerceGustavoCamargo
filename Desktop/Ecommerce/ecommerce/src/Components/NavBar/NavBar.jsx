@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link, NavLink } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import PcStoreLogo from "../../assets/PcStoreLogo.svg";
@@ -10,18 +12,14 @@ import "./NavBar.css";
 
 import CartWidget from "../CarWidget/CartWidget";
 
-
-function NavBar(props) {
-
-  const {updatePageName} = props; //Sirve para actualizar el nombre de la pagina, lo puedes ver en WorkInProgress.jsx
-    
+function NavBar() {
   return (
     <>
       <Navbar bg="dark" expand="lg" className="Nav">
         <Container>
-          <Navbar.Brand href="#home">
-            <img src={PcStoreLogo} alt="PcStoreLogo" className="logo" onClick={() => {updatePageName('Home')}} />
-          </Navbar.Brand>
+          <Link to="/">
+            <img src={PcStoreLogo} alt="PcStoreLogo" className="logo" />
+          </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -30,155 +28,225 @@ function NavBar(props) {
                 id="basic-nav-dropdown"
                 className="dropdowns"
               >
-                <NavDropdown.Item href="#action/3.1" className="dropdownItem" onClick={() => {updatePageName('Motherboard')}}>
-                  All Brands
-                </NavDropdown.Item>
+                <Link to="/Motherboard">
+                  <NavDropdown.Item href="#action/3.1" className="dropdownItem">
+                    All Brands
+                  </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2" className="dropdownItem" onClick={() => {updatePageName('Motherboard')}}>
-                  ROG
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3" className="dropdownItem" onClick={() => {updatePageName('Motherboard')}}>
-                  Asrock
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4" className="dropdownItem" onClick={() => {updatePageName('Motherboard')}}>
+                <Link to="/Motherboard/ROG">
+                  <NavDropdown.Item href="#action/3.2" className="dropdownItem">
+                    ROG
+                  </NavDropdown.Item>
+                </Link>
+                <Link to="/Motherboard/Asrock">
+                  <NavDropdown.Item href="#action/3.3" className="dropdownItem">
+                    Asrock
+                  </NavDropdown.Item>
+                </Link>
+                <Link to="/Motherboard/Aorus">
+                <NavDropdown.Item href="#action/3.4" className="dropdownItem">
                   Aorus
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.5" className="dropdownItem" onClick={() => {updatePageName('Motherboard')}}>
+                </Link>
+                <Link to="/Motherboard/MSI">
+                <NavDropdown.Item href="#action/3.5" className="dropdownItem">
                   MSI
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.6" className="dropdownItem" onClick={() => {updatePageName('Motherboard')}}>
+                </Link>
+                <Link to="/Motherboard/Gigabyte">
+                <NavDropdown.Item href="#action/3.6" className="dropdownItem">
                   Gigabyte
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.7" className="dropdownItem" onClick={() => {updatePageName('Motherboard')}}>
+                </Link>
+                <Link to="/Motherboard/Asus">
+                <NavDropdown.Item href="#action/3.7" className="dropdownItem">
                   Asus
                 </NavDropdown.Item>
+                </Link>
               </NavDropdown>
               <NavDropdown
                 title="Processors"
                 id="basic-nav-dropdown"
                 className="dropdowns"
               >
-                <NavDropdown.Item href="#action/3.1" className="dropdownItem" onClick={() => {updatePageName('Processors')}}>
+                <Link to="/Processor">
+                <NavDropdown.Item href="#action/3.1" className="dropdownItem">
                   All Brands
                 </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2" className="dropdownItem" onClick={() => {updatePageName('Processors')}}>
+                <Link to="/Processor/Intel">
+                <NavDropdown.Item href="#action/3.2" className="dropdownItem">
                   Intel
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3" className="dropdownItem" onClick={() => {updatePageName('Processors')}}>
+                </Link>
+                <Link to="/Processor/AMD">
+                <NavDropdown.Item href="#action/3.3" className="dropdownItem">
                   AMD
                 </NavDropdown.Item>
+                </Link>
               </NavDropdown>
               <NavDropdown
                 title="Graphics Cards"
                 id="basic-nav-dropdown"
                 className="dropdowns"
               >
-                <NavDropdown.Item href="#action/3.1" className="dropdownItem" onClick={() => {updatePageName('Graphics Card')}}>
+                <Link to="/GraphicsCard">
+                <NavDropdown.Item href="#action/3.1" className="dropdownItem">
                   All Brands
                 </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2" className="dropdownItem" onClick={() => {updatePageName('Graphics Card')}}>
+                <Link to="/GraphicsCard/Nvidia">
+                <NavDropdown.Item href="#action/3.2" className="dropdownItem">
                   Nvidia
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3" className="dropdownItem" onClick={() => {updatePageName('Graphics Card')}}>
+                </Link>
+                <Link to="/GraphicsCard/AMD">
+                <NavDropdown.Item href="#action/3.3" className="dropdownItem">
                   AMD
                 </NavDropdown.Item>
+                </Link>
               </NavDropdown>
               <NavDropdown
-                title="Memory"
+                title="RAM"
                 id="basic-nav-dropdown"
                 className="dropdowns"
               >
-                <NavDropdown.Item href="#action/3.1" className="dropdownItem" onClick={() => {updatePageName('Memory')}}>
+                <Link to="/RAM">
+                <NavDropdown.Item href="#action/3.1" className="dropdownItem">
                   All Brands
                 </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2" className="dropdownItem" onClick={() => {updatePageName('Memory')}}>
+                <Link to="/RAM/Corsair">
+                <NavDropdown.Item href="#action/3.2" className="dropdownItem">
                   Corsair
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3" className="dropdownItem" onClick={() => {updatePageName('Memory')}}>
+                </Link>
+                <Link to="/RAM/G.Skill">
+                <NavDropdown.Item href="#action/3.3" className="dropdownItem">
                   G.Skill
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4" className="dropdownItem" onClick={() => {updatePageName('Memory')}}>
+                </Link>
+                <Link to="/RAM/HyperX">
+                <NavDropdown.Item href="#action/3.4" className="dropdownItem">
                   HyperX
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.5" className="dropdownItem" onClick={() => {updatePageName('Memory')}}>
+                </Link>
+                <Link to="/RAM/Kingston">
+                <NavDropdown.Item href="#action/3.5" className="dropdownItem">
                   Kingston
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.6" className="dropdownItem" onClick={() => {updatePageName('Memory')}}>
-                  Team Group
+                </Link>
+                <Link to="/RAM/Thermaltake">
+                <NavDropdown.Item href="#action/3.6" className="dropdownItem">
+                  Thermaltake
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.7" className="dropdownItem" onClick={() => {updatePageName('Memory')}}>
+                </Link>
+                <Link to="/RAM/Crucial">
+                <NavDropdown.Item href="#action/3.7" className="dropdownItem">
                   Crucial
                 </NavDropdown.Item>
+                </Link>
               </NavDropdown>
               <NavDropdown
                 title="Storage"
                 id="basic-nav-dropdown"
                 className="dropdowns"
               >
-                <NavDropdown.Item href="#action/3.1" className="dropdownItem" onClick={() => {updatePageName('Storage')}}>
+                <Link to="/Storage">
+                <NavDropdown.Item href="#action/3.1" className="dropdownItem">
                   All Brands
                 </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2" className="dropdownItem" onClick={() => {updatePageName('Storage')}}>
+                <Link to="/Storage/Seagate">
+                <NavDropdown.Item href="#action/3.2" className="dropdownItem">
                   Seagate
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3" className="dropdownItem" onClick={() => {updatePageName('Storage')}}>
+                </Link>
+                <Link to="/Storage/WD">
+                <NavDropdown.Item href="#action/3.3" className="dropdownItem">
                   Western Digital
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4" className="dropdownItem" onClick={() => {updatePageName('Storage')}}>
-                  Toshiba
+                </Link>
+                <Link to="/Storage/Corsair">
+                <NavDropdown.Item href="#action/3.4" className="dropdownItem">
+                  Corsair
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.5" className="dropdownItem" onClick={() => {updatePageName('Storage')}}>
+                </Link>
+                <Link to="/Storage/Samsung">
+                <NavDropdown.Item href="#action/3.5" className="dropdownItem">
                   Samsung
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.6" className="dropdownItem" onClick={() => {updatePageName('Storage')}}>
+                </Link>
+                <Link to="/Storage/Kingston">
+                <NavDropdown.Item href="#action/3.6" className="dropdownItem">
                   Kingston
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.7" className="dropdownItem" onClick={() => {updatePageName('Storage')}}>
+                </Link>
+                <Link to="/Storage/Crucial">
+                <NavDropdown.Item href="#action/3.7" className="dropdownItem">
                   Crucial
                 </NavDropdown.Item>
+                </Link>
               </NavDropdown>
               <NavDropdown
                 title="Cases"
                 id="basic-nav-dropdown"
                 className="dropdowns"
               >
-                <NavDropdown.Item href="#action/3.1" className="dropdownItem" onClick={() => {updatePageName('Cases')}}>
+                <Link to="/Case">
+                <NavDropdown.Item href="#action/3.1" className="dropdownItem">
                   All Brands
                 </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2" className="dropdownItem" onClick={() => {updatePageName('Cases')}}>
+                <Link to="/Case/Corsair">
+                <NavDropdown.Item href="#action/3.2" className="dropdownItem">
                   Corsair
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3" className="dropdownItem" onClick={() => {updatePageName('Cases')}}>
+                </Link>
+                <Link to="/Case/CoolerMaster">
+                <NavDropdown.Item href="#action/3.3" className="dropdownItem">
                   Cooler Master
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4" className="dropdownItem" onClick={() => {updatePageName('Cases')}}>
+                </Link>
+                <Link to="/Case/ROG">
+                <NavDropdown.Item href="#action/3.4" className="dropdownItem">
                   ROG
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.5" className="dropdownItem" onClick={() => {updatePageName('Cases')}}>
+                </Link>
+                <Link to="/Case/NZXT">
+                <NavDropdown.Item href="#action/3.5" className="dropdownItem">
                   NZXT
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.6" className="dropdownItem" onClick={() => {updatePageName('Cases')}}>
+                </Link>
+                <Link to="/Case/Thermaltake">
+                <NavDropdown.Item href="#action/3.6" className="dropdownItem">
                   Thermaltake
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.7" className="dropdownItem" onClick={() => {updatePageName('Cases')}}>
+                </Link>
+                <Link to="/Case/LianLi">
+                <NavDropdown.Item href="#action/3.7" className="dropdownItem">
                   Lian Li
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.8" className="dropdownItem" onClick={() => {updatePageName('Cases')}}>
+                </Link>
+                <Link to="/Case/Deepcool">
+                <NavDropdown.Item href="#action/3.8" className="dropdownItem">
                   Deepcool
                 </NavDropdown.Item>
+                </Link>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
-           <CartWidget /> {/* Llamado del componente CartWidget */}
+          <Link to="/cart">
+            <CartWidget /> {/* Llamado del componente CartWidget */}
+          </Link>
         </Container>
       </Navbar>
-
-      
     </>
   );
 }

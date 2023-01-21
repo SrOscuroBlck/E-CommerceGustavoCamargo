@@ -1,0 +1,16 @@
+.container {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+}
+
+h5 {
+    color: black !important;
+}
+.card-text {
+    color: #414141 !important;
+}
+
+.loader {
+    padding: 5vh;
+}

@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { BrowserRouter ,Routes, Route, Navigate } from "react-router-dom";
 import './App.css'
+import { ItemListContainer } from "./Components/ItemListContainer/ItemListContainer";
+import { ItemDetailContainer } from "./Components/ItemDetailContainer/ItemDetailContainer";
 import Navbar from './Components/NavBar/NavBar'
-import WorkInProgress from './Components/WorkInProgress/WorkInProgress'
+import { CartContainer } from "./Components/CartContainer/CartContainer";
 
 function App() {
-  //Este useState es el hook que se encarga de actualizar el nombre de la pagina, o eso entendí jajjajjajajajja
-  const [pageName, setPageName] = useState('Home') 
-  //Esta funcion ayuda a actualizar el nombre de la pagina
-  const updatePageName = (newPageName) => {
-    setPageName(newPageName)
-  }
 
   return (
-    <>
-      <Navbar updatePageName = {updatePageName} />
-      <WorkInProgress currentPageName = {pageName} />
-    </>
+    
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<ItemListContainer />} />
+        <Route path="/:categoryId" element={<ItemListContainer />} />
+        <Route path="/:categoryId/:brandId" element={<ItemListContainer />} />
+        <Route path="/:categoryId/:brandId/:itemId" element={<ItemDetailContainer />} />
+        <Route path="/cart" element={<CartContainer />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
