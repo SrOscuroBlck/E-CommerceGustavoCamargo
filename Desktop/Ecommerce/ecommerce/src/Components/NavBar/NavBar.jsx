@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -10,7 +10,7 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 import "./NavBar.css";
 
-import CartWidget from "../CarWidget/CartWidget";
+import cartWidget from "../../assets/cart.svg";
 
 function NavBar() {
   return (
@@ -243,7 +243,7 @@ function NavBar() {
             </Nav>
           </Navbar.Collapse>
           <Link to="/cart">
-            <CartWidget /> {/* Llamado del componente CartWidget */}
+            <img src={cartWidget} alt="CartWidget"  />
           </Link>
         </Container>
       </Navbar>
