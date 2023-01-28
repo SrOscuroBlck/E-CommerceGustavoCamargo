@@ -1,10 +1,15 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { ItemCount } from '../Itemcount/ItemCount'
 import { getProducts } from '../ItemListContainer/getProducts'
 import './ItemDetailContainer.css'
 
 export const ItemDetailContainer = () => {
+  const onAdd = (cant) => {
+    console.log(cant)
+  }
+
     const [product, setProduct] = useState('')
     const { itemId } = useParams()
     console.log(itemId)
@@ -38,7 +43,7 @@ export const ItemDetailContainer = () => {
                 </div>
                 <p>{product.category}</p>
                 <p>{product.brand}</p>
-                <button className="cart">Add to cart</button>
+                <ItemCount stock={product.stock} initial={1} onAdd={onAdd}/>
 
               </div>
             </div>

@@ -3,6 +3,9 @@
     flex-direction: row !important;
     flex-wrap: wrap !important;
 }
+.back {
+    background-color: #1c1c1c !important;
+}
 
 h5 {
     color: black !important;

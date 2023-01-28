@@ -67,19 +67,22 @@ export const ItemListContainer = () => {
       {
         loading
         ?
+          
           <center>
             <div className="loader">
               <img src={Loader} alt="loader" />
             </div>
           </center>  
         :
-        <div className="container">
-        {products.map((product) => {
-          return (
-            <Item key={product.id} product={product} />
-          );
-        })}
-      </div>
+        <div className="back">
+          <div className="container">
+            {products.map((product) => {
+              return (
+                <Item key={product.id} product={product} />
+              );
+            })}
+          </div>
+        </div>
       }
       
     </>

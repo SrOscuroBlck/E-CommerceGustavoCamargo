@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-
+import './Item.css'
 
 export const Item = (props) => {
     const product = props.product;
@@ -8,6 +8,7 @@ export const Item = (props) => {
     <div className="col-4 p-2 mt-3 mb-3">
               <div
                 key={product.id}
+                id="card"
                 className="card w-100 text-center shadow"
                 style={{ width: "18rem" }}
               >
@@ -20,9 +21,9 @@ export const Item = (props) => {
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">{product.price}</p>
                   <Link to={`/${product.category}/${product.brand}/${product.id}`}>
-                    <a href="#" className="btn btn-primary">
-                      View Product
-                    </a>
+                      <a id='viewButton' href="#" className="btn btn-secondary">
+                        View Product
+                      </a>
                   </Link>
                 </div>
               </div>
