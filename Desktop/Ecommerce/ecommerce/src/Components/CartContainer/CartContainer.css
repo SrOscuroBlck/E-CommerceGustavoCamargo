@@ -1,0 +1,26 @@
+.card {
+    margin: 40px;
+}
+
+.cart-item {
+    display: flex;
+  }
+  
+  .cart-item img {
+    width: 100px;
+    margin-right: 10px;
+  }
+  
+  .item-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .item-details p {
+    margin: 0;
+  }
+
+  p {
+    color: red !important;
+  }
+  

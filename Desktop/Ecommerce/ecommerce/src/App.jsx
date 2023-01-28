@@ -4,22 +4,27 @@ import { ItemListContainer } from "./Components/ItemListContainer/ItemListContai
 import { ItemDetailContainer } from "./Components/ItemDetailContainer/ItemDetailContainer";
 import Navbar from './Components/NavBar/NavBar'
 import { CartContainer } from "./Components/CartContainer/CartContainer";
+import { CartContext, CartContextProvider } from "./Context/CartContext";
+import { useContext } from 'react'
 
 function App() {
 
   return (
     
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<ItemListContainer />} />
-        <Route path="/:categoryId" element={<ItemListContainer />} />
-        <Route path="/:categoryId/:brandId" element={<ItemListContainer />} />
-        <Route path="/:categoryId/:brandId/:itemId" element={<ItemDetailContainer />} />
-        <Route path="/cart" element={<CartContainer />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
+    <CartContextProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<ItemListContainer />} />
+          <Route path="/:categoryId" element={<ItemListContainer />} />
+          <Route path="/:categoryId/:brandId" element={<ItemListContainer />} />
+          <Route path="/:categoryId/:brandId/:itemId" element={<ItemDetailContainer />} />
+          <Route path="/cart" element={<CartContainer />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
+    </CartContextProvider>
+
   )
 }
 

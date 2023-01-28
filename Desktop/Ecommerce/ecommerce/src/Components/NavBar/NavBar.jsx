@@ -37,7 +37,7 @@ function NavBar() {
             aria-controls="basic-navbar-nav"
           />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto mx-an  uto">
+            <Nav className="me-auto mx-auto">
               <NavDropdown
                 title="MotherBoards"
                 id="basic-nav-dropdown"

@@ -16,7 +16,7 @@ export const ItemCount = ({initial, stock, onAdd}) => {
         }
     }
     const handleOnAdd = () => {
-        onAdd("Added" + count + "items to cart")
+        onAdd(count)
     }
 
   return (
