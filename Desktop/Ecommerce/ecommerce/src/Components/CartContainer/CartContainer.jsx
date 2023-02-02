@@ -10,10 +10,14 @@ export const CartContainer = () => {
         {cartList.map((cartItem) => {
           return (
             //Create a horizontal card with the product info and the quantity of the product in the cart
-            <div className="card" key={cartItem.id}>
-              <div class="cart-item">
+            <div 
+              className="card" 
+              key={cartItem.id}
+              id="cart-card"
+            >
+              <div class="cart-item" id="cart-item">
                 <img src={cartItem.pictureUrl} alt={`${cartItem.name} image`} />
-                <div class="item-details">
+                <div class="item-details" id="cart-item-details">
                   <h3>{cartItem.name}</h3>
                   <p>{cartItem.quantity}</p>
                 </div>
