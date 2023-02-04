@@ -5,7 +5,7 @@ import './Item.css'
 export const Item = (props) => {
     const product = props.product;
   return (
-    <div className="col-4 p-2 mt-3 mb-3">
+    <div className="col-4 p-2 mt-3 mb-3" id="itemContainer">
               <div
                 key={product.id}
                 id="card"
@@ -21,9 +21,7 @@ export const Item = (props) => {
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">{product.price}</p>
                   <Link to={`/${product.category}/${product.brand}/${product.id}`}>
-                      <a id='viewButton' href="#" className="btn btn-secondary">
-                        View Product
-                      </a>
+                      <button className="btn btn-danger">View Product</button>
                   </Link>
                 </div>
               </div>

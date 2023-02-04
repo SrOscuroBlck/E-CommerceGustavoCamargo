@@ -18,7 +18,6 @@ export const ItemListContainer = () => {
   useEffect(() => {
     if (categoryId) {
       if(brandId){
-      
         setLoading(true);
         getProducts()
           .then((response) => {

@@ -7,9 +7,8 @@ import { getProducts } from '../ItemListContainer/getProducts'
 import './ItemDetailContainer.css'
 
 export const ItemDetailContainer = () => {
-  const { cartList, addToCart } = useContext(CartContext)
 
-  
+  const { cartList, addToCart, setCartList } = useContext(CartContext)
   const [product, setProduct] = useState('')
   const { itemId } = useParams()
   console.log(itemId)

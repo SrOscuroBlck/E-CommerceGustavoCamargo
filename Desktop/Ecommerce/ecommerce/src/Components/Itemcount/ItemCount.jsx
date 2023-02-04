@@ -1,9 +1,12 @@
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from 'react';
+import { Link } from "react-router-dom";
+
 
 export const ItemCount = ({initial, stock, onAdd}) => {
     const [count, setCount] = useState(initial);
+    const [itemInCart, setItemInCart] = useState(false);
 
     const handleAdd = () => {
         if (count < stock) {
@@ -11,12 +14,13 @@ export const ItemCount = ({initial, stock, onAdd}) => {
         }   
     }
     const  handleSubstract = () => {
-        if (count > initial) {
+        if (count > initial) {å
             setCount(count - 1);
         }
     }
     const handleOnAdd = () => {
         onAdd(count)
+        setItemInCart(true)
     }
 
   return (
@@ -32,11 +36,23 @@ export const ItemCount = ({initial, stock, onAdd}) => {
                 <button className='btn btn-outline-dark w-100' onClick={handleSubstract}>-</button>
             </div>
         </div>
+        {
+            itemInCart 
+            ?
+                <div className='card-footer'>
+                    <Link to='/'>
+                        <button className='btn btn-outline-dark w-100'>Keep Buying</button>
+                    </Link>
+                    <Link to='/cart'>
+                        <button className='btn btn-outline-dark w-100'>Go to cart</button>
+                    </Link>
+                </div>
+            :
+                <div className='card-footer'>
 
-        <div className='card-footer'>
-            <button className='btn btn-outline-dark w-100' onClick={handleOnAdd}>Add to cart</button>
-        </div>
-
+                    <button className='btn btn-outline-dark w-100' onClick={handleOnAdd}>Add to cart</button>
+                </div>
+        }
 
     </div>
   )

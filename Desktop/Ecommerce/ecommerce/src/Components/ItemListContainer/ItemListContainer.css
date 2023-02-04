@@ -17,3 +17,18 @@ h5 {
 .loader {
     padding: 5vh;
 }
+
+
+@media screen and (max-width: 768px ) {
+    #card {
+        width: 60vw !important;
+    }
+    .container {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    #itemContainer {
+        width: fit-content;
+        height: fit-content;
+    }
+}
