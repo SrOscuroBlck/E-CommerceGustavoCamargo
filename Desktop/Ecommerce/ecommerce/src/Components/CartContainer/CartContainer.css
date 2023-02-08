@@ -6,6 +6,17 @@
   height: 75vh;
 }
 
+/* Make #login-container be above everything in the screen and centered */
+
+#login-container {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
 #cart-card {
   margin: 40px;
   
@@ -43,6 +54,14 @@
     margin-right: 10px;
     margin-top: 4%;
     margin-bottom: 4%;
+  }
+
+  #clrBtn {
+    margin-right: 10px !important;
+  }
+
+  #compBtn {
+    margin-left: 10px  !important;
   }
 
   /* I want to center the h3 in the container */

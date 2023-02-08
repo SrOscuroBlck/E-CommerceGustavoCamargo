@@ -1,26 +1,22 @@
-import React from "react";
-
-import { Link } from "react-router-dom";
+/*
+  Coded by Gustavo Camargo
+  @SrOscuroBlck
+  Thx to teacher Fede from CoderHouse
+*/
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import PcStoreLogo from "../../assets/PcStoreLogo.svg";
-
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-
-import "./NavBarContainer.css";
-
-import cartWidget from "../../assets/cart.svg";
 import { Categories } from "./Categories/Categories";
 import { MainNav } from "./MainNav/MainNav";
+import "./NavBarContainer.css";
 
-function NavBar() {
+export const NavBarContainer = () => {
+  // NavBarContainer is composed of MainNav and Categories
   return (
     <>
+      {/* MainNav consists in the logo and cart */}
       <MainNav />
+      {/* Categories consists in all the brands and types of components it works like a filter */}
       <Categories />
     </>
   );
-}
-
-export default NavBar;
+};

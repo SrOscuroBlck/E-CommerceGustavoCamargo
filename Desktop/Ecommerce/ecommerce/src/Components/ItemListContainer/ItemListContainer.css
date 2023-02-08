@@ -18,6 +18,18 @@ h5 {
     padding: 5vh;
 }
 
+.no-products-container {
+    display: grid;
+    place-items: center;
+    padding-top: 18%;
+    padding-bottom: 18%;
+    gap: 2rem;
+}
+
+.no-products-container h1 {
+    color: #1d1d1d !important;
+}
+
 
 @media screen and (max-width: 768px ) {
     #card {

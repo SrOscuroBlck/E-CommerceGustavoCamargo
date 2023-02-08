@@ -1,33 +1,37 @@
-import React from 'react'
+/*
+  Coded by Gustavo Camargo
+  @SrOscuroBlck
+  Thx to teacher Fede from CoderHouse
+*/
+
 import { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { CartContext } from '../../Context/CartContext'
 import { ItemCount } from '../Itemcount/ItemCount'
-import { getProducts } from '../ItemListContainer/getProducts'
+import { getProduct } from '../../firebase/config'
 import './ItemDetailContainer.css'
-
+import Loader from "./../../assets/loader.svg";
 export const ItemDetailContainer = () => {
-
+  const [loading, setLoading] = useState(true)
   const { cartList, addToCart, setCartList } = useContext(CartContext)
   const [product, setProduct] = useState('')
   const { itemId } = useParams()
-  console.log(itemId)
   
   useEffect(() => {
-    if(itemId){
-      getProducts()
+      console.log(itemId)
+      getProduct(itemId)
       .then((response) => {
-        setProduct(response.find((items) => items.id == itemId))
+        setProduct(response)
       })
       .catch((error) => {
         console.log(error)
       })
-    }else {
-      console.log('No hay productos')
-    }
+      .finally(() => {
+        setLoading(false)
+      })
   }, [itemId])
   const onAdd = (cant) => {
-
+    
     const itemInCart = cartList.find((item) => item.id === product.id)
     if (itemInCart) {
       itemInCart.quantity += cant
@@ -39,6 +43,13 @@ export const ItemDetailContainer = () => {
   }
   return (
     <>
+        {loading ? (
+        <center>
+          <div className="loader">
+            <img src={Loader} alt="loader" />
+          </div>
+        </center>
+        ) : (
         <div className="app">
             <div className="details" key={product.id}>
               <div className="big-img">
@@ -57,6 +68,7 @@ export const ItemDetailContainer = () => {
               </div>
             </div>
         </div>
+        )}
     </>
   )
 }

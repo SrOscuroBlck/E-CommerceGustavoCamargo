@@ -16,8 +16,8 @@ const products = [
     { id: 15, name: "Force Series Gen.4 PCIE MP600 2TB M.2", category: "Storage", brand: "Corsair", price: '1500usd', stock: 20, pictureUrl: "https://clonesyperifericos.com/wp-content/uploads/2022/09/1-28.jpg" },
 ];
 
-export const getProducts = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => resolve(products), 1000);
-    });
-};
+// export const getProducts = () => {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => resolve(products), 1000);
+//     });
+// };
