@@ -91,4 +91,14 @@
     transform: translateY(2px);
     box-shadow: 0 2px 10px rgba(0, 123, 255, 0.5);
   }
+
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    background-color: #4d1a1e;
+    border: #ff0000 1px solid;
+    padding: 5px;
+    margin-bottom: 1rem;
+  }
   

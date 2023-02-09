@@ -49,11 +49,22 @@ export const Login = ({placeOrder}) => {
   };
 
   const handlePlaceOrder = () => {
-    placeOrder(name, email, areaCode + phone);
-    };
+    if (!isNameValid || !isEmailValid || !isPhoneValid) {
+      // show a message indicating that all fields must be filled
+      setErrorMessage('All fields must be filled');
+      return;
+    }
 
+    placeOrder(name, email, areaCode + phone);
+    setErrorMessage('');
+    };
+    
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+    
   return (
     <form onSubmit={handleSubmit} className="login-form">
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
       <div className="form-group">
         <label htmlFor="name">Name:</label>
         <input
@@ -63,7 +74,12 @@ export const Login = ({placeOrder}) => {
           onChange={handleNameChange}
           className="form-control"
         />
-        {isNameValid && <span className="valid-icon">&#10003;</span>}
+        {isNameValid ? (
+          
+          <span className="valid-icon">&#10003;</span>
+        ) :
+          <span className="invalid-icon">&#10007;</span>
+        }
       </div>
       <div className="form-group">
         <label htmlFor="email">Email:</label>
@@ -108,7 +124,7 @@ export const Login = ({placeOrder}) => {
               <span className="invalid-icon">&#10007;</span>
             )}
         </div>
-        <button type="submit" className="btn btn-primary" id='btn' onClick={handlePlaceOrder}>
+        <button type="submit" className="btn btn-primary" id='btn' onClick={handlePlaceOrder} disabled={isSubmitDisabled}>
           Submit
         </button>
         </form>

@@ -22,6 +22,7 @@ import { Login } from "../Login/Login";
 
 export const CartContainer = () => {
   const [beforePurchase, setBeforePurchase] = useState(true);
+  const [notification, setNotification] = useState(false);
   const { cartList, removeItem, editQuantity, clearCart, totalPrice } =
   useContext(CartContext);
   
@@ -65,6 +66,10 @@ export const CartContainer = () => {
         console.log("Order placed");
         clearCart();
         updateStock();
+        setBeforePurchase(true);
+        setNotification(true);
+        setTimeout(() => setNotification(false), 2000);
+
       });
   };
 
@@ -85,6 +90,11 @@ export const CartContainer = () => {
 
   return (
     <>
+      {notification && 
+        <div className="notification" id="notification">
+          Your order has been placed.
+        </div>
+      }
       {cartList.map((cartItem) => {
         return (
           <div className="card" key={cartItem.id} id="cart-card">
@@ -139,19 +149,12 @@ export const CartContainer = () => {
           </button>
         </center>
       )}
-      {!beforePurchase ? (
-
+      {!beforePurchase && (
         <center>
           <div id="login-container">
             <Login placeOrder={placeOrder}/>
           </div>
         </center>
-      ) : (
-        <div className="afterPurchase">
-          <h3 className="text-center" id="clear">
-            Your order has been placed
-          </h3>
-        </div>
       )}
     </>
   );
