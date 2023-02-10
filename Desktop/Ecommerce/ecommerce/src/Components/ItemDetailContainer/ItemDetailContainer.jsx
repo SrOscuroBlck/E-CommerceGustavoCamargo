@@ -11,14 +11,27 @@ import { ItemCount } from '../Itemcount/ItemCount'
 import { getProduct } from '../../firebase/config'
 import './ItemDetailContainer.css'
 import Loader from "./../../assets/loader.svg";
+
+/**
+ * @function ItemDetailContainer - Componente que muestra el detalle de un producto en especifico.
+ * @returns {JSX.Element} - Retorna el componente ItemDetailContainer.
+ * @description - Este componente recibe un producto en especifico y lo regresa al padre para que lo muestre en pantalla junto a los demas de array de productos.
+ */
+
 export const ItemDetailContainer = () => {
   const [loading, setLoading] = useState(true)
   const { cartList, addToCart, setCartList } = useContext(CartContext)
   const [product, setProduct] = useState('')
   const { itemId } = useParams()
+
+  /**
+   * @function useEffect - En este caso, el useEffect me sirve para extraer el producto de la base de datos y mostrarlo en pantalla.
+   * @function getProduct - Funcion que me trae un producto de la base de datos.
+   * Todas las anteriores funciones son importadas desde el archivo config.js.
+   * @function onAdd - Funcion que me permite agregar un producto al carrito de compras, mediante el contexto CartContext.
+   */
   
   useEffect(() => {
-      console.log(itemId)
       getProduct(itemId)
       .then((response) => {
         setProduct(response)

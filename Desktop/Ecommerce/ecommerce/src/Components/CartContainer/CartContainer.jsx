@@ -11,20 +11,37 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-
 import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useContext } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { CartItemEdit } from "./CartItemEdit/CartItemEdit";
 import "./CartContainer.css";
 import { Login } from "../Login/Login";
 
+/**
+ * @function CartContainer - Componente que muestra el carrito de compras.
+ * @details - Este componente muestra el carrito de compras, con la posibilidad de editar la cantidad de productos, eliminarlos y vaciar el carrito, ademas de mostrar el total de la compra.
+ * Este fue el componente mas complejo de hacer, ya que utilizamos el contexto CartContext para poder manejar el carrito de compras.
+ * @returns {JSX.Element} - Retorna el componente CartContainer.
+ */
+
 export const CartContainer = () => {
   const [beforePurchase, setBeforePurchase] = useState(true);
   const [notification, setNotification] = useState(false);
-  const { cartList, removeItem, editQuantity, clearCart, totalPrice } =
-  useContext(CartContext);
+  const { cartList, removeItem, editQuantity, clearCart, totalPrice } =useContext(CartContext);
+
+  /**
+   * @function placeOrder - Funcion que me permite realizar la compra.
+   * @function updateStock - Funcion que me permite actualizar el stock de los productos.
+   * @function setBeforePurchase - Funcion que me permite cambiar el estado de la variable beforePurchase de esta manera puedo mostrar el formulario de compra.
+   * @function setNotification - Funcion que me permite cambiar el estado de la variable notification de esta manera puedo mostrar la notificacion de compra realizada.
+   * ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   * @function clearCart - Funcion que me permite vaciar el carrito de compras.
+   * @function totalPrice - Funcion que me permite calcular el total de la compra.
+   * @function editQuantity - Funcion que me permite editar la cantidad de productos en el carrito de compras.
+   * @function removeItem - Funcion que me permite eliminar un producto del carrito de compras.
+   * Todas las anteriores funciones son importadas desde el archivo CartContext.js.
+   */
   
   const updateStock = () => {
     // update the stock by subtracting the quantity of the product in the cart
@@ -53,9 +70,8 @@ export const CartContainer = () => {
       buyer: buyer,
       orderItems: items,
       total: totalPrice(),
+      date: new Date()
     };
-
-    console.log(order);
 
     const db = getFirestore();
     const queryCollection = collection(db, "orders");
@@ -63,7 +79,6 @@ export const CartContainer = () => {
       .then((resp) => console.log(resp))
       .catch((err) => console.log(err))
       .finally(() => {
-        console.log("Order placed");
         clearCart();
         updateStock();
         setBeforePurchase(true);
@@ -85,6 +100,11 @@ export const CartContainer = () => {
 
   const handleClear = () => {
     clearCart();
+  };
+
+  const handleToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setBeforePurchase(false);
   };
 
 
@@ -128,7 +148,7 @@ export const CartContainer = () => {
         </div>
       ) : (
         <center>
-          <h3 className="text-center" id="clear">
+          <h3 className="text-center">
             Total: ${totalPrice()}
           </h3>
           <button
@@ -142,7 +162,7 @@ export const CartContainer = () => {
           <button
             className="btn btn-success"
             id="compBtn"
-            onClick={() => setBeforePurchase(() => false)}
+            onClick={() => handleToTop()}
           >
             {" "}
             Complete Purchase
@@ -152,7 +172,7 @@ export const CartContainer = () => {
       {!beforePurchase && (
         <center>
           <div id="login-container">
-            <Login placeOrder={placeOrder}/>
+            <Login placeOrder={placeOrder} setBeforePurchase={setBeforePurchase} />
           </div>
         </center>
       )}

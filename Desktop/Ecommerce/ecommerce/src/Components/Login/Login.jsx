@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { AreaCodes } from './AreaCodes';
 import './Login.css';
 
-const areaCodes = [  
-  { label: 'Argentina (+54)', value: '+54' },  
-  { label: 'Colombia (+57)', value: '+57' },  
-  { label: 'Uruguay (+598)', value: '+598' },  
-  { label: 'Brazil (+55)', value: '+55' }
-];
+/**
+ * @returns {JSX.Element} Login
+ * @description El componente Login se compone de un formulario con validaciones, fue el componente al cual
+ * le aplique todo lo que se de backend, en este caso el manejo de estados y validaciones.
+ * @function Login - Funcion que retorna un formulario con validaciones
+ */
 
-export const Login = ({placeOrder}) => {
+export const Login = ({placeOrder, setBeforePurchase}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -16,6 +17,21 @@ export const Login = ({placeOrder}) => {
   const [isNameValid, setIsNameValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
+  /**
+   * @function handleNameChange - Funcion que maneja el cambio de estado del input name, comprueba que el nombre no este vacio
+   * y si no lo esta, cambia el estado de isNameValid a true, de lo contrario a false y almacena el valor del input en el estado name.
+   * @function handleEmailChange - Funcion que maneja el cambio de estado del input email, comprueba que el email sea valido
+   * y si lo es, cambia el estado de isEmailValid a true, de lo contrario a false y almacena el valor del input en el estado email.
+   * @function handlePhoneChange - Funcion que maneja el cambio de estado del input phone, comprueba que el telefono sea valido
+   * y si lo es, cambia el estado de isPhoneValid a true, de lo contrario a false y almacena el valor del input en el estado phone.
+   * @function handleAreaCodeChange - Funcion que maneja el cambio de estado del input areaCode, almacena el valor del input en el estado areaCode.
+   * @function handleSubmit - Funcion que maneja el evento submit del formulario, comprueba que todos los campos esten validos y si lo estan, habilita el boton.
+   * @function handlePlaceOrder - Funcion que aplica todas las anteriores y envia la orden al componente padre donde se envia a la base de datos.
+   * 
+   */
 
   const handleNameChange = event => {
     setName(event.target.value);
@@ -40,12 +56,6 @@ export const Login = ({placeOrder}) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
-    if (isNameValid && isEmailValid && isPhoneValid) {
-      console.log(`Name: ${name}`);
-      console.log(`Email: ${email}`);
-      console.log(`Phone: ${areaCode}${phone}`);
-    }
   };
 
   const handlePlaceOrder = () => {
@@ -58,9 +68,6 @@ export const Login = ({placeOrder}) => {
     placeOrder(name, email, areaCode + phone);
     setErrorMessage('');
     };
-    
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
     
   return (
     <form onSubmit={handleSubmit} className="login-form">
@@ -105,9 +112,9 @@ export const Login = ({placeOrder}) => {
               onChange={handleAreaCodeChange}
               className="form-control"
             >
-              {areaCodes.map(areaCode => (
-                <option key={areaCode.value} value={areaCode.value}>
-                  {areaCode.label}
+              {AreaCodes.map(areaCode => (
+                <option key={areaCode.code} value={areaCode.value}>
+                  {areaCode.label} ({areaCode.value})
                 </option>
               ))}
             </select>
@@ -124,8 +131,11 @@ export const Login = ({placeOrder}) => {
               <span className="invalid-icon">&#10007;</span>
             )}
         </div>
-        <button type="submit" className="btn btn-primary" id='btn' onClick={handlePlaceOrder} disabled={isSubmitDisabled}>
+        <button type="submit" className="btn btn-success" id='submit-btn' onClick={handlePlaceOrder} disabled={isSubmitDisabled}>
           Submit
+        </button>
+        <button type="cancel" className="btn btn-danger" id='cancel-btn' onClick={() => setBeforePurchase(true)}>
+          Cancel
         </button>
         </form>
         );

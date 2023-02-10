@@ -1,10 +1,21 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+/**
+ * @function ItemCount - Este componente me permite agregar productos al carrito.
+ * @description - Este componente me ayuda a modificar la cantidad de productos que quiero agregar al carrito. Tambien revisa el stock del producto y me permite agregarlo al carrito.
+ */
 
 export const ItemCount = ({ initial, stock, onAdd }) => {
   const [count, setCount] = useState(initial);
   const [itemInCart, setItemInCart] = useState(false);
+  
+  /**
+   * @function handleAdd - Funcion que me permite aumentar la cantidad de productos que quiero agregar al carrito, aqui se revisa el stock del producto.
+   * @function handleSubstract - Funcion que me permite disminuir la cantidad de productos que quiero agregar al carrito.
+   * @function onAdd - Funcion que me permite agregar el producto al carrito.
+   * @function setItemInCart - Funcion que me permite cambiar el estado de itemInCart.
+   */
 
   const handleAdd = () => {
     if (count < stock) {

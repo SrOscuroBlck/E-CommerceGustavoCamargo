@@ -1,21 +1,22 @@
-/*
-  Coded by Gustavo Camargo
-  @SrOscuroBlck
-  Thx to teacher Fede from CoderHouse
+/**
+  *Coded by Gustavo Camargo
+  *@SrOscuroBlck
+  *Thx to teacher Fede from CoderHouse
 */
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Categories } from "./Categories/Categories";
 import { MainNav } from "./MainNav/MainNav";
 import "./NavBarContainer.css";
 
+/**
+ * @returns {JSX.Element} NavBarContainer components.
+ * @description NavBarContainer es el contenedor que tiene a MainNav y Categories.
+**/
+
 export const NavBarContainer = () => {
-  // NavBarContainer is composed of MainNav and Categories
   return (
     <>
-      {/* MainNav consists in the logo and cart */}
       <MainNav />
-      {/* Categories consists in all the brands and types of components it works like a filter */}
       <Categories />
     </>
   );

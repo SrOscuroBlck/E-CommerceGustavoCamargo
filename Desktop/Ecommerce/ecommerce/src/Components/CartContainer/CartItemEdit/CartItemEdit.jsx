@@ -1,12 +1,21 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from 'react';
+
+/**
+ * 
+ * @function CartItemEdit - Este componente me permite modificar la cantidad de productos que quiero agregar al carrito.
+ * @description - Este componente me ayuda a modificar la cantidad de productos que quiero agregar al carrito.
+ */
 
 export const CartItemEdit = ({initial, onEdit, id}) => {
     const [count, setCount] = useState(initial);
 
+    /**
+     * @function handleAdd - Funcion que me permite aumentar la cantidad de productos que quiero agregar al carrito, aqui se revisa el stock del producto.
+     * @function handleSubstract - Funcion que me permite disminuir la cantidad de productos que quiero agregar al carrito.
+     * @function onAdd - Funcion que me permite agregar el producto al carrito.
+    */
     const handleAdd = () => {
         setCount(count + 1)
-        console.log(count)
         onEdit(id, count + 1)
     }
     const  handleSubstract = () => {

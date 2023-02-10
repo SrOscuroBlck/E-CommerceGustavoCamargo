@@ -1,10 +1,11 @@
-/*
-  Coded by Gustavo Camargo
+/**
   @SrOscuroBlck
-  Thx to teacher Fede from CoderHouse
+  Coded by Gustavo Camargo - Junior Developer
+  @Credits Thx to teacher Fede from CoderHouse
 */
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { ItemListContainer } from "./Components/ItemListContainer/ItemListContainer";
 import { ItemDetailContainer } from "./Components/ItemDetailContainer/ItemDetailContainer";
 import { NavBarContainer } from "./Components/NavBarContainer/NavBarContainer";
@@ -12,35 +13,46 @@ import { CartContainer } from "./Components/CartContainer/CartContainer";
 import { CartContextProvider } from "./Context/CartContext";
 import "./App.css";
 
+/**
+ * @function App
+ * @returns {JSX.Element} App components.
+    * El CartContextProvider es el que provee todos los elementos del carrito de compras a la App.
+    * El BrowserRouter es el que provee la navegación entre las páginas.
+    * El NavBarContainer es el que provee la barra de navegación.
+    * El Routes es el que provee las rutas de navegación.
+    * El Route es el que provee la ruta de navegación.
+ */
+
 function App() {
-  //App navigation is handled by react-router-dom
   return (
     <CartContextProvider>
-      {/* thats why we need to wrap the whole app in a BrowserRouter and use Routes and Route components */}
       <BrowserRouter>
-        {/* NavBar is rendered in all pages thats why is not inside of routes */}
         <NavBarContainer />
         <Routes>
-          {/* Routes are rendered depending on the path */}
           <Route 
-            path="/" 
-            element={<ItemListContainer />} />
+            path="/"
+            element={<ItemListContainer />} 
+          />
           <Route 
             path="/:categoryId" 
-            element={<ItemListContainer />} />
+            element={<ItemListContainer />} 
+          />
           <Route 
             path="/:categoryId/:brandId" 
-            element={<ItemListContainer />} />
+            element={<ItemListContainer />} 
+          />
           <Route
             path="/:categoryId/:brandId/:itemId"
             element={<ItemDetailContainer />}
           />
           <Route 
             path="/cart" 
-            element={<CartContainer />} />
+            element={<CartContainer />} 
+          />
           <Route 
             path="*" 
-            element={<Navigate to="/" />} />
+            element={<Navigate to="/" />} 
+          />
         </Routes>
       </BrowserRouter>
     </CartContextProvider>
