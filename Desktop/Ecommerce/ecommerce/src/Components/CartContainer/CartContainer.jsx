@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { CartItemEdit } from "./CartItemEdit/CartItemEdit";
+import { Link } from "react-router-dom";
 import "./CartContainer.css";
 import { Login } from "../Login/Login";
 
@@ -28,7 +29,8 @@ import { Login } from "../Login/Login";
 export const CartContainer = () => {
   const [beforePurchase, setBeforePurchase] = useState(true);
   const [notification, setNotification] = useState(false);
-  const { cartList, removeItem, editQuantity, clearCart, totalPrice } =useContext(CartContext);
+  const { cartList, removeItem, editQuantity, clearCart, totalPrice } =
+    useContext(CartContext);
 
   /**
    * @function placeOrder - Funcion que me permite realizar la compra.
@@ -42,7 +44,7 @@ export const CartContainer = () => {
    * @function removeItem - Funcion que me permite eliminar un producto del carrito de compras.
    * Todas las anteriores funciones son importadas desde el archivo CartContext.js.
    */
-  
+
   const updateStock = () => {
     // update the stock by subtracting the quantity of the product in the cart
     cartList.forEach((item) => {
@@ -51,42 +53,49 @@ export const CartContainer = () => {
       updateDoc(queryDocUpdate, { stock: item.stock - item.quantity });
     });
   };
-  const placeOrder = (name, email, phone) => {
-    setBeforePurchase(false);
-    const buyer = {
-      name: name,
-      email: email,
-      phone: phone,
-    };
-    const items = cartList.map((item) => {
-      return {
-        id: item.id,
-        title: item.name,
-        price: item.price,
-      };
-    });
+  
+  const [orderId, setOrderId] = useState(null);
 
-    const order = {
-      buyer: buyer,
-      orderItems: items,
-      total: totalPrice(),
-      date: new Date()
-    };
-
-    const db = getFirestore();
-    const queryCollection = collection(db, "orders");
-    addDoc(queryCollection, order)
-      .then((resp) => console.log(resp))
-      .catch((err) => console.log(err))
-      .finally(() => {
-        clearCart();
-        updateStock();
-        setBeforePurchase(true);
-        setNotification(true);
-        setTimeout(() => setNotification(false), 2000);
-
-      });
+const placeOrder = (name, email, phone) => {
+  setBeforePurchase(false);
+  const buyer = {
+    name: name,
+    email: email,
+    phone: phone,
   };
+  const items = cartList.map((item) => {
+    return {
+      id: item.id,
+      title: item.name,
+      price: item.price,
+    };
+  });
+
+  const order = {
+    buyer: buyer,
+    orderItems: items,
+    total: totalPrice(),
+    date: new Date(),
+  };
+
+  const db = getFirestore();
+  const queryCollection = collection(db, "orders");
+  addDoc(queryCollection, order)
+    .then((docRef) => {
+      setOrderId(docRef.id);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      clearCart();
+      updateStock();
+      setBeforePurchase(true);
+      setNotification(true);
+      setTimeout(() => {
+        setNotification(false);
+        setOrderId(null);
+      }, 4000);
+    });
+};
 
 
   //I decided not to change my functions, it will be my unique way to do it
@@ -103,18 +112,17 @@ export const CartContainer = () => {
   };
 
   const handleToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setBeforePurchase(false);
   };
 
-
   return (
     <>
-      {notification && 
+      {notification && (
         <div className="notification" id="notification">
-          Your order has been placed.
+          Your order has been placed. The id of your order is {orderId}
         </div>
-      }
+      )}
       {cartList.map((cartItem) => {
         return (
           <div className="card" key={cartItem.id} id="cart-card">
@@ -140,17 +148,18 @@ export const CartContainer = () => {
           </div>
         );
       })}
-      {(cartList.length === 0 && beforePurchase === true) ? (
+      {cartList.length === 0 && beforePurchase === true ? (
         <div className="cartContainer">
           <h3 className="text-center" id="clear">
             Your cart is empty
           </h3>
+          <Link to="/">
+            <button className="btn btn-danger">Return to Main Page</button>
+          </Link>
         </div>
       ) : (
         <center>
-          <h3 className="text-center">
-            Total: ${totalPrice()}
-          </h3>
+          <h3 className="text-center">Total: ${totalPrice()}</h3>
           <button
             className="btn btn-danger"
             id="clrBtn"
@@ -172,11 +181,13 @@ export const CartContainer = () => {
       {!beforePurchase && (
         <center>
           <div id="login-container">
-            <Login placeOrder={placeOrder} setBeforePurchase={setBeforePurchase} />
+            <Login
+              placeOrder={placeOrder}
+              setBeforePurchase={setBeforePurchase}
+            />
           </div>
         </center>
       )}
     </>
   );
 };
-

@@ -20,7 +20,7 @@ import Loader from "./../../assets/loader.svg";
 
 export const ItemDetailContainer = () => {
   const [loading, setLoading] = useState(true)
-  const { cartList, addToCart, setCartList } = useContext(CartContext)
+  const { cartList, addToCart, updateCart, setCartList } = useContext(CartContext)
   const [product, setProduct] = useState('')
   const { itemId } = useParams()
 
@@ -47,8 +47,7 @@ export const ItemDetailContainer = () => {
     
     const itemInCart = cartList.find((item) => item.id === product.id)
     if (itemInCart) {
-      itemInCart.quantity += cant
-      setCartList([...cartList])
+      updateCart(product.id, cant)
     } else {
       addToCart({ ...product, quantity: cant })
     }
